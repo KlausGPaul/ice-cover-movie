@@ -13,15 +13,9 @@ _Fetterer, F., K. Knowles, W. N. Meier, M. Savoie, and A. K. Windnagel. 2017, up
 
 ## Installation and running
 
-This app uses [pipenv](https://pipenv.pypa.io/en/latest/), a [good guide is here, too](https://realpython.com/pipenv-guide/) to install dependencies.
-We need
-* streamlit
-* pandas, numpy, matplotlib
-* [imageio](https://imageio.github.io/) to create the animated gif
+[Launch it on streamlit](https://share.streamlit.io/klausgpaul/ice-cover-movie/ice_cover_movie.py)
 
-## TODO
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/klausgpaul/ice-cover-movie/ice_cover_movie.py)
 
-* add curve fitting and fly-forwarding
-* twitter button
-* _(most likely not possible) download button for git._ In the mean time, use a right mouse click and download the gif that way.
+[Original idea](https://gitlab.com/KlausGPaul/climate-change)
 
