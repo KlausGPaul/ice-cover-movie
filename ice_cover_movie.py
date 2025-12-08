@@ -14,11 +14,11 @@ import calendar
 import base64
 import random
 
-@st.cache
+@st.cache_data
 def download_sea_ice_extent(localpath="./sun"):
     Path(localpath).mkdir(exist_ok=True,parents=True)
     try:
-        filename = os.path.join(localpath,"N_seaice_extent_daily_v3.0.parquet")
+        filename = os.path.join(localpath,"N_seaice_extent_daily_v4.0.parquet")
     except:
         pass
     download = True
@@ -30,7 +30,7 @@ def download_sea_ice_extent(localpath="./sun"):
         else:
             download = True
     if download:
-        url = "http://masie_web.apps.nsidc.org/pub/DATASETS/NOAA/G02135/north/daily/data/N_seaice_extent_daily_v3.0.csv"
+        url = "http://masie_web.apps.nsidc.org/pub/DATASETS/NOAA/G02135/north/daily/data/N_seaice_extent_daily_v4.0.csv"
         r = requests.get(url)
         df = pd.read_csv(io.StringIO(r.text),skiprows=[1],header=0)
         for c in df.columns:
@@ -40,7 +40,7 @@ def download_sea_ice_extent(localpath="./sun"):
         df.to_parquet(filename)
     return df
 
-@st.cache
+@st.cache_data
 def get_dates(method,month,df):
     years = range(df.year.min(),df.year.max()+1)
     dates = []
@@ -112,7 +112,7 @@ def download_directory(progressbar,dates,localpath):
             #print(os.path.join(localpath,"N_{:%Y%m%d}_extn_blmrbl_v3.0.png".format(refdate)))
             continue
         url = "http://masie_web.apps.nsidc.org/pub/DATASETS/NOAA/G02135/north/daily/images/{:%Y}/{:%m}_{:%b}/".format(refdate,refdate,refdate)
-        file = "N_{:%Y%m%d}_extn_blmrbl_v3.0.png".format(refdate)
+        file = "N_{:%Y%m%d}_extn_blmrbl_v4.0.png".format(refdate)
         r = requests.get(url+file)
         if r.ok:
             try:
@@ -130,7 +130,7 @@ def download_directory(progressbar,dates,localpath):
 st.header("""Arctic ice cover over the past three decades""")
 
 st.markdown(body="""We have heard about it. But seeing it yourself, and getting a feel for the data is much better. 
-    This notebook downloads northern hemisphere satellite images.""")
+    This webpage downloads northern hemisphere satellite images.""")
 
 with st.spinner("Downloading sea ice extent data from http://masie_web.apps.nsidc.org"):
     df = download_sea_ice_extent()
