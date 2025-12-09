@@ -20,7 +20,6 @@ import datetime
 import os
 import imageio
 import io
-import requests
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 import calendar
@@ -44,7 +43,7 @@ def download_sea_ice_extent(localpath="./sun"):
             download = True
     if download:
         url = "http://masie_web.apps.nsidc.org/pub/DATASETS/NOAA/G02135/north/daily/data/N_seaice_extent_daily_v4.0.csv"
-        r = requests.get(url)
+        r = requests.get(url,verify=False)
         df = pd.read_csv(io.StringIO(r.text),skiprows=[1],header=0)
         for c in df.columns:
             df.rename(columns={c:c.strip().lower()},inplace=True)
@@ -126,7 +125,7 @@ def download_directory(progressbar,dates,localpath):
             continue
         url = "http://masie_web.apps.nsidc.org/pub/DATASETS/NOAA/G02135/north/daily/images/{:%Y}/{:%m}_{:%b}/".format(refdate,refdate,refdate)
         file = "N_{:%Y%m%d}_extn_blmrbl_v4.0.png".format(refdate)
-        r = requests.get(url+file)
+        r = requests.get(url+file,verify=False)
         if r.ok:
             try:
                 with open(os.path.join(localpath,"N_{:%Y%m%d}_extn_blmrbl_v3.0.png".format(refdate)),"w+b") as imagefile:
