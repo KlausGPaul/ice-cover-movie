@@ -1,3 +1,16 @@
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#   "streamlit",
+#   "pandas",
+#   "requests",
+#   "geopandas",
+#   "matplotlib",
+#   "pyarrow",
+#   "calendar",
+#   "imageio"
+# ]
+# ///
 import streamlit as st
 import pandas as pd
 import numpy as np
